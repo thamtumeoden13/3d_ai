@@ -99,8 +99,12 @@ const Customizer = () => {
                 body: JSON.stringify({ prompt })
             })
             const data = await response.json()
+            if (response.status == 200 && data.photo) {
+                handleDecals(type, `data:image/png;base64,${data.photo}`)
+            } else {
+                alert(data.message)
+            }
 
-            handleDecals(type, `data:image/png;base64,${data.photo}`)
         } catch (error) {
             alert(error)
         } finally {
